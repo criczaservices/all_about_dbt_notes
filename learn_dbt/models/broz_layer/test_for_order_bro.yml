@@ -1,0 +1,44 @@
+# not_null_test this is the test where dbt can check the data quility that it follow the 
+# test or not 
+version : 2
+# chcking null values 
+models:
+  - name: orders_broz      # model file name broz laye / filename 
+
+    columns:                  # column define  
+      - name: ORDER_ID 
+        # column_name  
+
+        tests:                  # tests to define 
+          - not_null      # chaeck the null valaue            
+          - unique          # check the deduplacate value
+  
+  # HERE WE  CHECK THAT EVERY CUSTOMER HAVE THE PROPER ORDER OR NOT 
+      - name: CUSTOMER_ID      # defin in the other way to verifiy 
+        tests:
+
+          - relationships:
+             to: ref('customer_broz')  # REALTIONSHIP checck that every order have vaild customer 
+             field: CUSTOMER_ID  
+            
+        
+        # CHECK THE ORDER_STATUS COLUMN HAVE THIS VALUE OR NOT           
+      - name: ORDER_STATUS
+        tests:
+            - accepted_values:
+                arguments:    
+                  values: ['COMPLETE','PENDING','CANCELLED','REFUNDED']
+                config:
+                    severity: warn     # here severity not  field run of the pipline if any test is feild it just warn
+
+
+# documentation 
+# command - dbt test --store-failures  this command is used to store the dbt test feild record in the table format to audit the tables 
+# dbt test --select orders_broz --store-failures  here we specify the test name 
+# we drict add this into the dbt_profile.yml file also 
+#data_tests:
+# +store_failures: true
+
+ #    config:
+ #               error_if: ">100"     # if records feiles count is more than the 100 than the test field
+  #              warn_if: ">0"        # if less than or grater than 0 than it just warn to us not feild  

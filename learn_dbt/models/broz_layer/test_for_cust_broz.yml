@@ -1,0 +1,13 @@
+# not_null_test this is the test where dbt can check the data quility that it follow the 
+# test or not 
+version : 2
+# chcking null values 
+models:
+  - name: customer_broz       # model file name broz laye / filename 
+
+    columns:                  # column define  
+      - name: customer_id     # column_name  
+    
+        tests:                  # tests to define 
+          - not_null      # chaeck the null valaue            
+          - unique        # check the deduplacate value

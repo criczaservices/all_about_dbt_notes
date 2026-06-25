@@ -33,3 +33,27 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+    
+    broz_layer:               # folder name 
+      customer_broz :          # spcifice file
+        +materialized: view  # which view want to cretae
+        +schema: brozen       # creating the schema separete to sotre the file result
+
+      orders_broz:              # file namae 
+        +materialized: view    # this view that we want to create
+        +schema: brozen
+    
+    silver_layer:                  # another model name 
+      +materialized : table
+      +schema : silver
+    
+    data mart :              # another model 
+      data_mart:                 
+      +materialized : incremental 
+      +schema : golden
+
+
+    
+    
+    
+

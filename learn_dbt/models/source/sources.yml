@@ -1,0 +1,10 @@
+version: 2     # ymal version 
+
+sources:
+  - name: data_source   # this name cloud be anything
+
+    schema: source         # it have you ctalog name 
+
+    tables:
+      - name: customer
+      - name: orders

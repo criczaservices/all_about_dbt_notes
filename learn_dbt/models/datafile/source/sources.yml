@@ -1,9 +1,0 @@
-version 2:
-
-sources:
-    - name : source
-      databasename: learn_dbt
-      schema: source
-      tables:
-        - name: orders
-        - name : customer
